@@ -1,0 +1,81 @@
+template <typename T>
+Particle<T>::Particle() {
+    position = Vector(std::vector<float>{0.0, 0.0});
+    velocity = Vector(std::vector<float>{0.0, 0.0});
+    acceleration = Vector(std::vector<float>{0.0, 0.0});
+    mass = 1.0;
+}
+
+template <typename T>
+Particle<T>::Particle(Vector<T> position) 
+    : position(position) {
+    velocity = Vector(position*0);
+    acceleration = Vector(position*0);
+    mass = 1.0;
+}
+
+template <typename T>
+Particle<T>::Particle(Vector<T> position, double mass)
+    : position(position), mass(mass) {
+    velocity = Vector<T>(position*0);
+    acceleration = Vector<T>(position*0);
+}
+
+template <typename T>
+Particle<T>::Particle(Vector<T> position,
+     Vector<T> velocity,
+     Vector<T> acceleration,
+     double mass)
+    : position(position), velocity(velocity), acceleration(acceleration), mass(mass) {}
+
+template <typename T>
+Vector<T> Particle<T>::getPosition() {
+    return position;
+}
+
+template <typename T>
+Vector<T> Particle<T>::getVelocity() {
+    return velocity;
+}
+
+template <typename T>
+Vector<T> Particle<T>::getAcceleration() {
+    return acceleration;
+}
+
+template <typename T>
+double Particle<T>::getMass() {
+    return mass;
+}
+
+template <typename T>
+void Particle<T>::setPosition(Vector<T> position) {
+    this->position = position;
+}
+
+template <typename T>
+void Particle<T>::setVelocity(Vector<T> velocity) {
+    this->velocity = velocity;
+}
+
+template <typename T>
+void Particle<T>::setAcceleration(Vector<T> acceleration) {
+    this->acceleration = acceleration;
+}
+
+template <typename T>
+void Particle<T>::setMass(double mass) {
+    this->mass = mass;
+}
+
+template <typename T>
+void Particle<T>::setForce(Vector<T> force) {
+    this->force = force;
+}
+
+template <typename T>
+void Particle<T>::update(double dt) {
+    acceleration = force/mass;
+    position += velocity*dt + 0.5*acceleration*dt*dt;
+    velocity += acceleration*dt;
+}
