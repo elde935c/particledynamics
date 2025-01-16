@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Vector.h"
 #include "Particle.hpp"
 
 using namespace MyMath;
@@ -11,4 +10,4 @@ class Force {
         static void gravity(Particle<T> &p0, Particle<T> &p1);
 };
 
-#include "Force.impl.hpp"	
+#include "Force.impl.hpp"

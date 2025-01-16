@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include "Particle.hpp"
-// #include "Vector.h"
 
 TEST(ParticleTest, DefaultConstructor) {
     Particle<float> p;
@@ -72,7 +71,7 @@ TEST(ParticleTest, UpdatePositionNoAcceleration) {
     double mass = 1.0;
     Particle<float> p(position, velocity, acceleration, mass);
 
-    p.setForce(Vector<float>(std::vector<float>{0.0, 0.0}));
+    p.addForce(Vector<float>(std::vector<float>{0.0, 0.0}));
 
     double dt = 1.0;
     p.update(dt);
@@ -84,7 +83,7 @@ TEST(ParticleTest, UpdatePositionNoAcceleration) {
 TEST(ParticleTest, UpdateVelocityNoVelocity) {
     Particle<float> p;
     Vector<float> force(std::vector<float>{1.0, 1.0});
-    p.setForce(force);
+    p.addForce(force);
 
     double dt = 1.0;
     p.update(dt);
@@ -101,7 +100,7 @@ TEST(ParticleTest, UpdatePositionAndVelocity) {
     Particle<float> p(position, velocity, acceleration, mass);
 
     Vector<float> force(std::vector<float>{1.0, 1.0});
-    p.setForce(force);
+    p.addForce(force);
 
     double dt = 1.0;
     p.update(dt);
@@ -114,3 +113,24 @@ TEST(ParticleTest, UpdatePositionAndVelocity) {
     EXPECT_EQ(p.getVelocity(), expectedVelocity);
     EXPECT_EQ(p.getAcceleration(), expectedAcceleration);
 }
+
+TEST(ParticleTest, resetForce) {
+    Vector<float> position(std::vector<float>{0.0, 0.0});
+    Vector<float> velocity(std::vector<float>{1.0, 1.0});
+    Vector<float> acceleration(std::vector<float>{1.0, 1.0});
+    double mass = 1.0;
+    Particle<float> p(position, velocity, acceleration, mass);
+
+    Vector<float> force0(std::vector<float>{1.0, 1.0});
+    p.addForce(force0);
+    p.resetForce();
+    Vector<float> force1(std::vector<float>{1.0, 1.0});
+    p.addForce(force1);
+
+    double dt = 1.0;
+    p.update(dt);
+
+    Vector<float> expectedAcceleration(force1/mass);
+    EXPECT_EQ(p.getAcceleration(), expectedAcceleration);
+}
+

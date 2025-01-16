@@ -25,13 +25,15 @@ public :
     Vector<T> getPosition();
     Vector<T> getVelocity();
     Vector<T> getAcceleration();
+    Vector<T> getForce();
     double getMass();
 
     void setPosition(Vector<T> position);
     void setVelocity(Vector<T> velocity);
     void setAcceleration(Vector<T> acceleration);
     void setMass(double mass);
-    void setForce(Vector<T> force);
+    void resetForce();
+    void addForce(Vector<T> additionalForce);
 
     void update(double dt);
 };
