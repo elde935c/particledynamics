@@ -14,3 +14,19 @@ TEST(ForceTest, Gravity) {
     EXPECT_EQ(p0.getForce(), expectedForce);
     EXPECT_EQ(p1.getForce(), -expectedForce);
 }
+
+
+TEST(ForceTest, CustomGravity) {
+    Vector<float> position0(std::vector<float>{0.0, 0.0});
+    Vector<float> position1(std::vector<float>{1.0, 0.0});
+    Particle<float> p0(position0);
+    Particle<float> p1(position1);
+
+    double G = 1.;
+
+    Force<float>::gravity(p0, p1, G);
+
+    Vector<float> expectedForce(std::vector<float>{1., 0.0});
+    EXPECT_EQ(p0.getForce(), expectedForce);
+    EXPECT_EQ(p1.getForce(), -expectedForce);
+}
