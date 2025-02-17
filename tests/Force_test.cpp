@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "Particle.hpp"
+#include "Electron.hpp"
 #include "Force.hpp"
 
 TEST(ForceTest, Gravity) {
@@ -27,6 +28,21 @@ TEST(ForceTest, CustomGravity) {
     Force<float>::gravity(p0, p1, G);
 
     Vector<float> expectedForce(std::vector<float>{1., 0.0});
+    EXPECT_EQ(p0.getForce(), expectedForce);
+    EXPECT_EQ(p1.getForce(), -expectedForce);
+}
+
+TEST(ForceTest , CustomCoulombsLaw) {
+    Vector<float> position0(std::vector<float>{0.0, 0.0});
+    Vector<float> position1(std::vector<float>{1.0, 0.0});
+    float mass = 1.;
+    float charge = 1.;
+    Electron<float> p0(position0, mass, charge);
+    Electron<float> p1(position1, mass, charge);
+
+    Force<float>::coulombsLaw(p0, p1, 1.);
+
+    Vector<float> expectedForce(std::vector<float>{1.0, 0.0});
     EXPECT_EQ(p0.getForce(), expectedForce);
     EXPECT_EQ(p1.getForce(), -expectedForce);
 }

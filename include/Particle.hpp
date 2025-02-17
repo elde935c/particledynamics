@@ -6,32 +6,32 @@ using namespace MyMath;
 
 template <typename T = float>
 class Particle {
-private:
+protected:
     Vector<T> position;
     Vector<T> velocity;
     Vector<T> acceleration;
     Vector<T> force;
-    double mass;
+    T mass;
 
 public :
     Particle();
     Particle(Vector<T> position);
-    Particle(Vector<T> position, double mass) ;   
+    Particle(Vector<T> position, T mass) ;   
     Particle(Vector<T> position,
              Vector<T> velocity,
              Vector<T> acceleration,
-             double mass);
+             T mass);
 
     Vector<T> getPosition();
     Vector<T> getVelocity();
     Vector<T> getAcceleration();
     Vector<T> getForce();
-    double getMass();
+    T getMass();
 
     void setPosition(Vector<T> position);
     void setVelocity(Vector<T> velocity);
     void setAcceleration(Vector<T> acceleration);
-    void setMass(double mass);
+    void setMass(T mass);
     void resetForce();
     void addForce(Vector<T> additionalForce);
 
