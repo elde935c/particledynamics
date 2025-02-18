@@ -14,6 +14,16 @@ TEST(ParticleTest, DefaultConstructor) {
     EXPECT_EQ(p.getMass(), expectedMass);
 }
 
+TEST (ParticleTest, MassConstructor) {
+    float mass = 2.0;
+    Particle<float> p(mass);
+    Vector expectedPosition(std::vector<float>{0.0, 0.0});
+    Vector expectedVelocity(std::vector<float>{0.0, 0.0});
+    Vector expectedAcceleration(std::vector<float>{0.0, 0.0});
+
+    EXPECT_EQ(p.getMass(), mass);
+}
+
 TEST(ParticleTest, PositionConstructor) {
     Vector position(std::vector<float>{1.0, 2.0});
     Particle p(position);

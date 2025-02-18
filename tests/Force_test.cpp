@@ -32,6 +32,23 @@ TEST(ForceTest, CustomGravity) {
     EXPECT_EQ(p1.getForce(), -expectedForce);
 }
 
+TEST(ForceTest, CoulombsLaw) {
+    Vector<float> position0(std::vector<float>{0.0, 0.0});
+    Vector<float> position1(std::vector<float>{1.0, 0.0});
+    Electron<float> p0(position0);
+    Electron<float> p1(position1);
+
+    Force<float>::coulombsLaw(p0, p1);
+
+    float k = 8.9875517873681764e9;
+    float q = 1.60217662e-19;
+    float F = k * q * q;
+
+    Vector<float> expectedForce(std::vector<float>{F, 0.0});
+    EXPECT_EQ(p0.getForce(), expectedForce);
+    EXPECT_EQ(p1.getForce(), -expectedForce);
+}
+
 TEST(ForceTest , CustomCoulombsLaw) {
     Vector<float> position0(std::vector<float>{0.0, 0.0});
     Vector<float> position1(std::vector<float>{1.0, 0.0});

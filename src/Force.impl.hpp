@@ -19,5 +19,5 @@ void Force<T>::coulombsLaw(Electron<T> &e0, Electron<T> &e1,
     Vector<T> F0 = F * r / r2;
     Vector<T> F1 = -F0;
     e0.addForce(F0);
-    e0.addForce(F1);
+    e1.addForce(F1);
 }

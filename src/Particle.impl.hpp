@@ -8,6 +8,15 @@ Particle<T>::Particle() {
 }
 
 template <typename T>
+Particle<T>::Particle(T mass) {
+    position = Vector(std::vector<float>{0.0, 0.0});
+    velocity = Vector(std::vector<float>{0.0, 0.0});
+    acceleration = Vector(std::vector<float>{0.0, 0.0});
+    this->mass = mass;
+    force = Vector(std::vector<float>{0.0, 0.0});
+}
+
+template <typename T>
 Particle<T>::Particle(Vector<T> position) 
     : position(position) {
     velocity = Vector(position*0);

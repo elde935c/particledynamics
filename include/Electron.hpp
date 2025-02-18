@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Force.hpp"
+#include "Particle.hpp"
 
 using namespace MyMath;
 

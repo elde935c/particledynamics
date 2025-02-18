@@ -15,6 +15,7 @@ protected:
 
 public :
     Particle();
+    Particle(T mass);
     Particle(Vector<T> position);
     Particle(Vector<T> position, T mass) ;   
     Particle(Vector<T> position,

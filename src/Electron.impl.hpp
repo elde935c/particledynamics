@@ -1,10 +1,11 @@
 template<typename T>
-Electron<T>::Electron() : Particle<T>() {
+Electron<T>::Electron() : Particle<T>(9.09e-31) {
     charge = -1.60217662e-19;
 }
 
 template<typename T>
-Electron<T>::Electron(Vector<T> position) : Particle<T>(position) {
+Electron<T>::Electron(Vector<T> position) : 
+    Particle<T>(position, 9.09e-31) {
     charge = -1.60217662e-19;
 }
 
@@ -17,7 +18,7 @@ Electron<T>::Electron(Vector<T> position, T mass) :
 template<typename T>
 Electron<T>::Electron(Vector<T> position, T mass, T charge) :
     Particle<T>(position, mass) {
-    charge = charge;
+    this->charge = charge;
 }   
 
 template<typename T>
@@ -27,7 +28,7 @@ Electron<T>::Electron(Vector<T> position,
         T mass, 
         T charge)
     : Particle<T>(position, velocity, acceleration, mass) {
-        charge = -1.60217662e-19;
+        this->charge = charge;
 }
 
 template<typename T>
@@ -37,5 +38,5 @@ T Electron<T>::getCharge() {
 
 template<typename T>
 void Electron<T>::setCharge(T charge) {
-    charge = charge;
+    this->charge = charge;
 }
