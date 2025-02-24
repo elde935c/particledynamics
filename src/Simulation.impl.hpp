@@ -1,11 +1,34 @@
+template<typename T>
+Simulation<T>::Simulation() : SimulationBase() {
+    particles = std::vector<Particle<T>>();
+}
+
 template <typename T>
-void defineForce(Force<T>::ForceType forcetype, T parameter) {
+void Simulation<T>::defineForce(typename Force<T>::ForceType forcetype,
+     T parameter) {
     switch (forcetype) {
-        case Force::ForceType::GRAVITY:
-            forceFunction = Force::gravity<T>;
+        case Force<T>::ForceType::GRAVITY:
+            if (std::isnan(parameter)) {
+                forceFunction = [](Particle<T>& p1, Particle<T>& p2) {
+                    Force<T>::gravity(p1, p2);
+                };
+            }
+            else {
+                forceFunction = std::bind(&Force<T>::gravity, std::placeholders::_1,
+                    std::placeholders::_2, parameter);
+            }
             break;
-        case Force::ForceType::COULOMBS_LAW:
-            forceFunction = Force::coulombsLaw<T>;
+        case Force<T>::ForceType::COULOMBS_LAW:
+            if (std::isnan(parameter)) {
+                forceFunction = [](Particle<T>& p1, Particle<T>& p2) {
+                    Force<T>::coulombsLaw(static_cast<Electron<T>>(p1),
+                    static_cast<Electron<T>>(p2));
+                };
+            }
+            else {
+                forceFunction = std::bind(&Force<T>::coulombsLaw, std::placeholders::_1,
+                    std::placeholders::_2, parameter);
+            }
             break;
         default:
             break;

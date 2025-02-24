@@ -14,7 +14,7 @@ class Force {
         static void coulombsLaw(Electron<T> &e0, Electron<T> &e1,
              double k = 8.9875517873681764e9);
 
-        enum ForceType {
+        enum class ForceType {
             GRAVITY,
             COULOMBS_LAW
         };

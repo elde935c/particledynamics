@@ -8,6 +8,15 @@ Particle<T>::Particle() {
 }
 
 template <typename T>
+Particle<T>::Particle(const Particle<T> &p) {
+    position = p.getPosition();
+    velocity = p.getVelocity();
+    acceleration = p.getAcceleration();
+    mass = p.getMass();
+    force = p.getForce();
+}
+
+template <typename T>
 Particle<T>::Particle(T mass) {
     position = Vector(std::vector<float>{0.0, 0.0});
     velocity = Vector(std::vector<float>{0.0, 0.0});
@@ -42,7 +51,7 @@ Particle<T>::Particle(Vector<T> position,
     }
 
 template <typename T>
-Vector<T> Particle<T>::getPosition() {
+const Vector<T>& Particle<T>::getPosition(){
     return position;
 }
 

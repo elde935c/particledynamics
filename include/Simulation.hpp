@@ -2,18 +2,19 @@
 
 #include <functional>
 
-#include "Simulation.hpp"
+#include "SimulationBase.hpp"
 #include "Particle.hpp"
 #include "Force.hpp"
 
 template <typename T = float>
 class Simulation : public SimulationBase {
     public:
-        Simulation : SimulationBase() {}
+        Simulation();
 
         void incrementTime(float dt) override;
 
-        void defineForce(Force<T>::ForceType forcetype, T parameter);
+        void defineForce(typename Force<T>::ForceType forcetype,
+             T parameter);
 
     private:
         std::vector<Particle<T>> particles;

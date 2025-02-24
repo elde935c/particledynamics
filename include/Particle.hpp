@@ -15,6 +15,7 @@ protected:
 
 public :
     Particle();
+    Particle(const Particle<T> &p);
     Particle(T mass);
     Particle(Vector<T> position);
     Particle(Vector<T> position, T mass) ;   
@@ -23,7 +24,7 @@ public :
              Vector<T> acceleration,
              T mass);
 
-    Vector<T> getPosition();
+    const Vector<T>& getPosition();
     Vector<T> getVelocity();
     Vector<T> getAcceleration();
     Vector<T> getForce();

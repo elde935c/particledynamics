@@ -10,6 +10,7 @@ class Electron : public Particle<T> {
         T charge;
     public:
         Electron();
+        Electron(const Particle<T> p);
         Electron(Vector<T> position);
         Electron(Vector<T> position, T mass);
         Electron(Vector<T> position, T mass, T charge);
