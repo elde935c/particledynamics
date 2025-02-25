@@ -24,7 +24,7 @@ public :
              Vector<T> acceleration,
              T mass);
 
-    const Vector<T>& getPosition();
+    Vector<T> getPosition();
     Vector<T> getVelocity();
     Vector<T> getAcceleration();
     Vector<T> getForce();

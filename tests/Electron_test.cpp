@@ -33,6 +33,23 @@ TEST(ElectronTest, ParticleConstructor) {
     EXPECT_EQ(e.getCharge(), expectedCharge);
 }
 
+TEST(ElectronTest, CopyConstructor) {
+    Electron<float> e;
+    Electron<float> e2(e);
+
+    Vector<float> expectedPosition(std::vector<float>{0.0, 0.0});
+    Vector<float> expectedVelocity(std::vector<float>{0.0, 0.0});
+    Vector<float> expectedAcceleration(std::vector<float>{0.0, 0.0});
+    float expectedMass = 9.09e-31;
+    float expectedCharge = -1.60217662e-19;
+
+    EXPECT_EQ(e2.getPosition(), expectedPosition);
+    EXPECT_EQ(e2.getVelocity(), expectedVelocity);
+    EXPECT_EQ(e2.getAcceleration(), expectedAcceleration);
+    EXPECT_EQ(e2.getMass(), expectedMass);
+    EXPECT_EQ(e2.getCharge(), expectedCharge);
+}
+
 TEST(ElectronTest, PositionConstructor) {
     Vector<float> position(std::vector<float>{1.0, 2.0});
     Electron<float> e(position);
