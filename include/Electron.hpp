@@ -11,7 +11,7 @@ class Electron : public Particle<T> {
     public:
         Electron();
         Electron(const Particle<T> p);
-        Electron(const Electron<T> e);
+        Electron(const Electron<T> &e);
         Electron(Vector<T> position);
         Electron(Vector<T> position, T mass);
         Electron(Vector<T> position, T mass, T charge);

@@ -5,17 +5,14 @@ Electron<T>::Electron() : Particle<T>(9.09e-31) {
 
 template<typename T>
 Electron<T>::Electron(const Particle<T> p) : Particle<T>(p) {
-    charge = -1.60217662e-19;
+    this->charge = -1.60217662e-19;
     this->mass = 9.09e-31;
 }
 
 template<typename T>
-Electron<T>::Electron(const Electron<T> e) {
-    this->position = p.position;
-    this->velocity = p.velocity;
-    this->acceleration = p.acceleration;
-    this->mass = p.mass;
-    this->force = p.force;
+Electron<T>::Electron(const Electron<T> &e) : 
+    Particle<T>(e.position, e.velocity, e.acceleration, e.mass) {
+    this->force = e.force;
     this->charge = e.charge;
 }
 

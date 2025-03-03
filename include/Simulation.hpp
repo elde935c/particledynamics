@@ -9,14 +9,23 @@
 template <typename T = float>
 class Simulation : public SimulationBase {
     public:
-        Simulation();
+        Simulation(T time = 0);
 
-        void incrementTime(float dt) override;
+        T getTime();
+
+        int getNumberOfParticles();
+
+        std::vector<Particle<T>> getParticles();
+
+        void addParticle(Particle<T> particle);
 
         void defineForce(typename Force<T>::ForceType forcetype,
              T parameter);
 
+        void incrementTime(T dt);
+
     private:
+        T time;
         std::vector<Particle<T>> particles;
         // todo change to general number of arguments
         std::function<void(Particle<T>&, Particle<T>&)> forceFunction;
