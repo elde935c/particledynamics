@@ -34,8 +34,6 @@ void Simulation<T>::defineForce(typename Force<T>::ForceType forcetype,
                 };
             }
             else {
-                // forceFunction = std::bind(&Force<T>::gravity, std::placeholders::_1,
-                //     std::placeholders::_2, parameter);
                 forceFunction = [parameter](Particle<T>& p1, Particle<T>& p2) {
                     Force<T>::gravity(p1, p2, parameter);
                 };
