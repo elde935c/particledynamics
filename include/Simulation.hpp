@@ -9,7 +9,7 @@
 template <typename T = float>
 class Simulation : public SimulationBase {
     public:
-        Simulation(T time = 0);
+        Simulation(const T time = 0);
 
         T getTime();
 

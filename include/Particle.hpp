@@ -16,13 +16,13 @@ protected:
 public :
     Particle();
     Particle(const Particle<T> &p);
-    Particle(T mass);
-    Particle(Vector<T> position);
-    Particle(Vector<T> position, T mass) ;   
-    Particle(Vector<T> position,
-             Vector<T> velocity,
-             Vector<T> acceleration,
-             T mass);
+    Particle(const T mass);
+    Particle(const Vector<T> &position);
+    Particle(const Vector<T> & position, const T mass) ;   
+    Particle(const Vector<T> & position,
+             const Vector<T> & velocity,
+             const Vector<T> &acceleration,
+             const T mass);
 
     Vector<T> getPosition();
     Vector<T> getVelocity();
@@ -30,14 +30,10 @@ public :
     Vector<T> getForce();
     T getMass();
 
-    void setPosition(Vector<T> position);
-    void setVelocity(Vector<T> velocity);
-    void setAcceleration(Vector<T> acceleration);
-    void setMass(T mass);
     void resetForce();
-    void addForce(Vector<T> additionalForce);
+    void addForce(const Vector<T> & additionalForce);
 
-    void update(const double dt);
+    void update(const T dt);
 };
 
 #include "Particle.impl.hpp"

@@ -10,19 +10,18 @@ class Electron : public Particle<T> {
         T charge;
     public:
         Electron();
-        Electron(const Particle<T> p);
+        Electron(const Particle<T> &p);
         Electron(const Electron<T> &e);
-        Electron(Vector<T> position);
-        Electron(Vector<T> position, T mass);
-        Electron(Vector<T> position, T mass, T charge);
-        Electron(Vector<T> position,
-                Vector<T> velocity,
-                Vector<T> acceleration,
-                T mass,
-                T charge);
+        Electron(const Vector<T> &position);
+        Electron(const Vector<T> &position, const T mass);
+        Electron(const Vector<T> &position, const T mass, const T charge);
+        Electron(const Vector<T> &position,
+            const Vector<T> &velocity,
+            const Vector<T> &acceleration,
+            const T mass,
+            const T charge);
             
         T getCharge();
-        void setCharge(T charge);
 };
 
 #include "Electron.impl.hpp"

@@ -1,5 +1,5 @@
 template<typename T>
-Simulation<T>::Simulation(T time) : SimulationBase() {
+Simulation<T>::Simulation(const T time) : SimulationBase() {
     this->time = time;
 }
 

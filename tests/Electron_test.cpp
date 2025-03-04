@@ -119,11 +119,10 @@ TEST(ElectronTest, PositionVelocityAccelerationMassChargeConstructor) {
 
 
 TEST(ElectronTest, static_castParticleToElectronConserveProperties) {
-    Particle<float> p;
-    p.setPosition(Vector<float>(std::vector<float>{1.0, 2.0}));
-    p.setVelocity(Vector<float>(std::vector<float>{3.0, 4.0}));
-    p.setAcceleration(Vector<float>(std::vector<float>{5.0, 6.0}));
-    p.setMass(2.0);
+    Particle<float> p(Vector<float>(std::vector<float>{1.0, 2.0}), 
+                      Vector<float>(std::vector<float>{3.0, 4.0}), 
+                      Vector<float>(std::vector<float>{5.0, 6.0}), 
+                      2.0);
     Electron<float> e = static_cast<Electron<float>>(p);
     Vector<float> expectedPosition(std::vector<float>{1.0, 2.0});
     Vector<float> expectedVelocity(std::vector<float>{3.0, 4.0});

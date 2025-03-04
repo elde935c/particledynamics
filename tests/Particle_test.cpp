@@ -77,17 +77,6 @@ TEST(ParticleTest, FullConstructorDoublePrecision) {
     EXPECT_EQ(p.getMass(), mass);
 }
 
-TEST(ParticleTest, SetPosition) {
-    Vector<float> initialPosition(std::vector<float>{1.0, 2.0});
-    Vector<float> newPosition(std::vector<float>{3.0, 4.0});
-    float mass = 2.0;
-    Particle<float> p(initialPosition, mass);
-
-    p.setPosition(newPosition);
-
-    EXPECT_EQ(p.getPosition(), newPosition);
-}
-
 TEST(ParticleTest, UpdatePositionNoAcceleration) {
     Vector<float> position(std::vector<float>{0.0, 0.0});
     Vector<float> velocity(std::vector<float>{1.0, 1.0});
