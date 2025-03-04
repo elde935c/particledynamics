@@ -6,7 +6,6 @@ Electron<T>::Electron() : Particle<T>(9.09e-31) {
 template<typename T>
 Electron<T>::Electron(const Particle<T> p) : Particle<T>(p) {
     this->charge = -1.60217662e-19;
-    this->mass = 9.09e-31;
 }
 
 template<typename T>

@@ -14,42 +14,42 @@ int Simulation<T>::getNumberOfParticles() {
 }
 
 template<typename T>
-std::vector<Particle<T>> Simulation<T>::getParticles() {
+auto Simulation<T>::getParticles() {
     return particles;
 }
 
 template<typename T>
-void Simulation<T>::addParticle(Particle<T> particle) {
+void Simulation<T>::addParticle(Particle<T> * particle) {
     particles.push_back(particle);
 }
 
 template <typename T>
-void Simulation<T>::defineForce(typename Force<T>::ForceType forcetype,
+void Simulation<T>::defineForce(const typename Force<T>::ForceType forcetype,
      T parameter) {
     switch (forcetype) {
         case Force<T>::ForceType::GRAVITY:
             if (std::isnan(parameter)) {
-                forceFunction = [](Particle<T>& p1, Particle<T>& p2) {
+                forceFunction = [](Particle<T>* p1, Particle<T>* p2) {
                     Force<T>::gravity(p1, p2);
                 };
             }
             else {
-                forceFunction = [parameter](Particle<T>& p1, Particle<T>& p2) {
+                forceFunction = [parameter](Particle<T>* p1, Particle<T>* p2) {
                     Force<T>::gravity(p1, p2, parameter);
                 };
             }
             break;
         case Force<T>::ForceType::COULOMBS_LAW:
             if (std::isnan(parameter)) {
-                forceFunction = [](Particle<T>& p1, Particle<T>& p2) {
-                    Force<T>::coulombsLaw(static_cast<Electron<T>&>(p1),
-                    static_cast<Electron<T>&>(p2));
+                forceFunction = [](Particle<T>* p1, Particle<T>* p2) {
+                    Force<T>::coulombsLaw(static_cast<Electron<T>*>(p1),
+                    static_cast<Electron<T>*>(p2));
                 };
             }
             else {
-                forceFunction = [parameter](Particle<T>& p1, Particle<T>& p2) {
-                    Force<T>::coulombsLaw(static_cast<Electron<T>&>(p1),
-                     static_cast<Electron<T>&>(p2), parameter);
+                forceFunction = [parameter](Particle<T>* p1, Particle<T>* p2) {
+                    Force<T>::coulombsLaw(static_cast<Electron<T>*>(p1),
+                     static_cast<Electron<T>*>(p2), parameter);
                 };
             }
             break;
@@ -59,9 +59,9 @@ void Simulation<T>::defineForce(typename Force<T>::ForceType forcetype,
 }
 
 template <typename T>
-void Simulation<T>::incrementTime(T dt) {
+void Simulation<T>::incrementTime(const T dt) {
     for (auto &particle : particles) {
-        particle.resetForce();
+        particle->resetForce();
     }
 
     for (int i = 0; i < particles.size(); i++) {
@@ -71,7 +71,7 @@ void Simulation<T>::incrementTime(T dt) {
     }
 
     for (auto &particle : particles) {
-        particle.update(dt);
+        particle->update(dt);
     }
 
     time += dt;

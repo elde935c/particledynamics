@@ -15,20 +15,20 @@ class Simulation : public SimulationBase {
 
         int getNumberOfParticles();
 
-        std::vector<Particle<T>> getParticles();
+        auto getParticles();
 
-        void addParticle(Particle<T> particle);
+        void addParticle(Particle<T> * particle);
 
-        void defineForce(typename Force<T>::ForceType forcetype,
-             T parameter);
+        void defineForce(const typename Force<T>::ForceType forcetype,
+             const T parameter);
 
-        void incrementTime(T dt);
+        void incrementTime(const T dt);
 
     private:
         T time;
-        std::vector<Particle<T>> particles;
+        std::vector<Particle<T>*> particles;
         // todo change to general number of arguments
-        std::function<void(Particle<T>&, Particle<T>&)> forceFunction;
+        std::function<void(Particle<T>*, Particle<T>*)> forceFunction;
 };
 
 #include "Simulation.impl.hpp"
