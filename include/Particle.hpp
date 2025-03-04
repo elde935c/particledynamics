@@ -37,7 +37,7 @@ public :
     void resetForce();
     void addForce(Vector<T> additionalForce);
 
-    void update(double dt);
+    void update(const double dt);
 };
 
 #include "Particle.impl.hpp"

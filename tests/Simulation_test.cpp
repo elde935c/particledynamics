@@ -92,3 +92,41 @@ TEST(SimulationTest, ApplyCustomCoulombLaw) {
     EXPECT_EQ(sim.getParticles()[0]->getForce(), Vector<float>({0.0f, 1.0f}));
     EXPECT_EQ(sim.getParticles()[1]->getForce(), Vector<float>({0.0f, -1.0f}));
 }
+
+TEST(SimulationTest, timeIncrement) {
+    auto sim = Simulation<float>(0.0f);
+    sim.incrementTime(0.01f);
+    EXPECT_EQ(sim.getTime(), 0.01f);
+}
+
+TEST(SimulationTest, customGravitySmallTimeStep) {
+    auto sim = Simulation<float>(0.0f);
+    sim.addParticle(new Particle<float>());
+    sim.addParticle(new Particle<float>(Vector<float>({0.0f, 1.0f})));
+    sim.defineForce(Force<float>::ForceType::GRAVITY, 1.0f);
+    sim.incrementTime(0.0001f);
+    EXPECT_EQ(sim.getParticles()[0]->getForce(), Vector<float>({0.0f, 1.0f}));
+    EXPECT_EQ(sim.getParticles()[0]->getAcceleration(), Vector<float>({0.0f, 1.0f}));
+    EXPECT_EQ(sim.getParticles()[0]->getVelocity(), Vector<float>({0.0f, 0.0001f}));
+    EXPECT_EQ(sim.getParticles()[0]->getPosition(), Vector<float>({0.0f, 0.5f*0.0001f*0.0001f}));
+    EXPECT_EQ(sim.getParticles()[1]->getForce(), Vector<float>({0.0f, -1.0f}));
+    EXPECT_EQ(sim.getParticles()[1]->getAcceleration(), Vector<float>({0.0f, -1.0f}));
+    EXPECT_EQ(sim.getParticles()[1]->getVelocity(), Vector<float>({0.0f, -0.0001f}));
+    EXPECT_EQ(sim.getParticles()[1]->getPosition(), Vector<float>({0.0f, 1 - 5e-9f}));
+}
+
+TEST(SimulationTest, customGravityFourParticles) {
+    auto sim = Simulation<float>(0.0f);
+    sim.addParticle(new Particle<float>());
+    sim.addParticle(new Particle<float>(Vector<float>({0.0f, 1.0f})));
+    sim.addParticle(new Particle<float>(Vector<float>({1.0f, 0.0f})));
+    sim.addParticle(new Particle<float>(Vector<float>({1.0f, 1.0f})));
+    sim.defineForce(Force<float>::ForceType::GRAVITY, 1.0f);
+    sim.incrementTime(0.01f);
+    float F = 1.0f + 1.0f/2.0f/std::sqrt(2.0f);
+    EXPECT_EQ(sim.getParticles()[0]->getForce(), Vector<float>({F, F}));
+    EXPECT_EQ(sim.getParticles()[1]->getForce(), Vector<float>({F, -F}));
+    EXPECT_EQ(sim.getParticles()[2]->getForce(), Vector<float>({-F, F}));
+    EXPECT_EQ(sim.getParticles()[3]->getForce(), Vector<float>({-F, -F}));
+
+}

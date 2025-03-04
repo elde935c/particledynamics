@@ -106,7 +106,7 @@ void Particle<T>::addForce(Vector<T> additionalForce) {
 }
 
 template <typename T>
-void Particle<T>::update(double dt) {
+void Particle<T>::update(const double dt) {
     acceleration = force/mass;
     position += velocity*dt + 0.5*acceleration*dt*dt;
     velocity += acceleration*dt;
